@@ -1,11 +1,38 @@
-package animals;
+package menu;
 
 public abstract class AbsAnimals {
 
+    private int id;
     private String name;
     private int age;
-    private int weight;
     private String color;
+    private int weight;
+    private String type;
+
+    public AbsAnimals(String name, int age, String color, int weight, String type) {
+        this.name = name;
+        this.age = age;
+        this.color = color;
+        this.weight = weight;
+        this.type = type;
+    }
+
+    public AbsAnimals(int id, String name, int age, int weight, String color, String type) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.color = color;
+        this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -37,6 +64,14 @@ public abstract class AbsAnimals {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void say() {
@@ -74,6 +109,6 @@ public abstract class AbsAnimals {
         return "Привет! Меня зовут " + name
                 + ", мне " + age + " " + selectAge(age) + ", "
                 + "я вешу " + weight
-                + "кг, мой цвет: " + color + ".";
+                + "кг, мой цвет: " + color + ". Мой номер = " + id + ".";
     }
 }
