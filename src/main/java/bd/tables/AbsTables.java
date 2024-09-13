@@ -20,7 +20,6 @@ public abstract class AbsTables implements ITables {
 
     @Override
     public void create(List<String> columns) {
-        delete();
         sqlConnect.execute(String.format(CREATE_TABLE, tableName, String.join(",", columns)));
     }
 

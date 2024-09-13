@@ -109,6 +109,6 @@ public abstract class AbsAnimals {
         return "Привет! Меня зовут " + name
                 + ", мне " + age + " " + selectAge(age) + ", "
                 + "я вешу " + weight
-                + "кг, мой цвет: " + color + ". Мой номер = " + id + ".";
+                + "кг, мой цвет: " + color + ". Мой номер = " + id + "." + " Тип " + type;
     }
 }

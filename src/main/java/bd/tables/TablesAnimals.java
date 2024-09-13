@@ -1,6 +1,8 @@
 package bd.tables;
 
 import menu.AbsAnimals;
+import menu.factory.AnimalsFactory;
+import menu.factory.AnimalsType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,6 +45,24 @@ public class TablesAnimals extends AbsTables {
                 break;
             }
         }
+    }
+
+    public ArrayList<AbsAnimals> getAnimal() {
+        ResultSet rs = select();
+        ArrayList<AbsAnimals> list = new ArrayList<>();
+        AnimalsFactory animalsFactory = new AnimalsFactory();
+        AbsAnimals animals;
+        try {
+            while (rs.next()) {
+                animals = animalsFactory.createAnimal(AnimalsType.valueOf(rs.getString("type").toUpperCase()), rs.getString("name"),
+                        rs.getInt("age"), rs.getString("color"), rs.getInt("weight"));
+                animals.setId(rs.getInt("id"));
+                list.add(animals);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Не удалось получить список животных.", e);
+        }
+        return list;
     }
 
     public void printTable(ResultSet rs) {

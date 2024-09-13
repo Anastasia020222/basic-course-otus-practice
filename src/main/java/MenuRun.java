@@ -15,15 +15,19 @@ public class MenuRun {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final AnimalsFactory animalsFactory = new AnimalsFactory();
-    private static final ArrayList<AbsAnimals> listAnimals = new ArrayList<>();
+    private static ArrayList<AbsAnimals> listAnimals = new ArrayList<>();
     private static final TablesAnimals tablesAnimals = new TablesAnimals();
 
     public static void main(String[] args) {
-        tablesAnimals.createAnimalTable();
-
         CommandsMenu com;
         boolean exit = false;
         AbsAnimals animal;
+
+        try {
+            listAnimals = tablesAnimals.getAnimal();
+        } catch (RuntimeException ex) {
+            tablesAnimals.createAnimalTable();
+        }
 
         System.out.println("Привет!");
 
@@ -51,7 +55,7 @@ public class MenuRun {
                         System.out.println("Список пуст. Сначала добавьте питомца.");
                         continue;
                     }
-                    printAnimal(listAnimals);
+                    tablesAnimals.selectAnimalTable();
                     break;
                 case EDIT:
                     if (listAnimals.isEmpty()) {
@@ -214,13 +218,6 @@ public class MenuRun {
             } catch (Exception ex) {
                 System.out.println("Вы ввесли неверный формат данных. Введите число.");
             }
-        }
-    }
-
-    public static void printAnimal(List<AbsAnimals> list) {
-        System.out.println("Лист с животными: ");
-        for (AbsAnimals animal : list) {
-            System.out.println(animal);
         }
     }
 }
